@@ -89,7 +89,7 @@ die("Connection failed: " . $conn->connect_error);
 if(!empty($_GET))
  {
 $data_in=$_GET['Search'];
-echo $data_in;
+
 $sql_search="select * from ProductsTable where name like '%{$data_in}%' ";
  $result_search=mysqli_query($conn,$sql_search);
  if($result_search)
@@ -100,14 +100,14 @@ if($count_search)
 while($row=$result_search->fetch_assoc())
 {
  $s=$row['files'];?> 
-<form action="forclick()" method="get" >
- <input type="checkbox" id="<?php $row['id']; ?>" name="<?php $row['id']; ?>" value="<?php $row['id']; ?>"
- </div><div class='div2'><style> .div2 { border-style:groove;}</style><img src="<?php echo $s; ?>" alt="HTML5 Icon" style="width:500px;height:500px">
- <br>Category:
- <?php echo $row["name"]; ?> <br>Price: <?php echo $row['price']; ?>
- <br>Size:<?php echo $row['si_ze']; ?>
+
+
+<div class='div2'><style> .div2 { border-style:groove;}</style><img src="<?php echo $s; ?>" alt="HTML5 Icon" style="width:500px;height:500px">
+<br>Category:
+<?php echo $row["name"]; ?> <br>Price: <?php echo $row['price']; ?>
+<br>Size:<?php echo $row['si_ze']; ?>
 <br>Description: <?php echo $row['description']; ?> 
-<br><button class="btn btn-outline-success my-2 my-sm-1" type="submit">Add to chart</button><br></div>
+<br><a class="btn btn-outline-success my-2 my-sm-1" href="add_chart.php?id=<?php echo $row['id']; ?>"  type="submit">Add to chart</a></div><br>
 <?php }
  }
  else

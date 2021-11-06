@@ -29,7 +29,7 @@
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item ">
+          <li class="nav-item">
             <a class="nav-link" href="home_admin.php">Home</a>
           </li>
 		  <li class="nav-item">
@@ -66,7 +66,7 @@
 		<div class="container">
         <!-- Example row of columns -->
 		<div class="col-sm-12 col-lg-6 mt-3">
-        <form action="change_pass.php" method="post" enctype="multipart/form-data">
+        <form action="change_pass_admin.php" method="post" enctype="multipart/form-data">
 			<label for="old_passord">Old password: </label>
           <input class="form-control mr-sm-1" type="password" placeholder="password"  name="old_password" required="required"> 
 		  <label for="mew_password">New password: </label>
@@ -92,8 +92,8 @@
 				if ($conn->connect_error) {
                  die("Connection failed: " . $conn->connect_error);
                    }
-				   
-				   $sql="SELECT email FROM LoginTable WHERE email='$email' and password='$password'";
+				   $old_passord=md5($password);
+				   $sql="SELECT email FROM LoginTable WHERE email='$email' and password='$old_passord'";
 				    $result = mysqli_query($conn,$sql);
 
                     $count = mysqli_num_rows($result);
@@ -106,8 +106,8 @@
 			      else{
 				   if($new_password===$new_password2)
 				   {
-					   $encode_pass=md5($password);
-				   $sql_out="update LoginTable set password=$encode_password where email='$email'";
+					   $new_pass=md5($new_password);
+				   $sql_out="update LoginTable set password= MD5('$_POST[new_password]') where email='$email'";
 				   if(mysqli_query($conn, $sql_out) === TRUE)
 				   {
 					   echo "Password changed successessfully";

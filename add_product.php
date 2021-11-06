@@ -73,8 +73,8 @@
           <input class="form-control mr-sm-1" type="text" placeholder="product name" aria-label="name" name="name" required="required"> 
 		  </br><label for="price">Price: </label></br>
 		  <input class="form-control mr-sm-2" type="text" placeholder="price" aria-label="price"  name="price" required="required">
-		   </br><label for="price">In stock: </label></br>
-		  <input class="form-control mr-sm-2" type="number" placeholder="in_stock" aria-label="in_stock"  name="in_stock" required="required">
+		   </br><label for="in_stock">In stock: </label></br>
+		  <input class="form-control mr-sm-2" type="text" placeholder="in_stock" aria-label="in_stock"  name="in_stock" required="required">
 		  </br><label for="sizes">Sizes: </label></br>
 		  <input type="radio" id="sizes" name="sizes" value="sizes">
           <label for="size1">XS</label><br>
@@ -117,7 +117,7 @@
                  die("Connection failed: " . $conn->connect_error);
                    }
 				   
-				   $sql = "INSERT INTO ProductsTable (name, price, si_ze,in_stock,description,files) VALUES ('$name', '$price', '$in_stock', '$sizes', '$description', '$picture')";
+				   $sql = "INSERT INTO ProductsTable (name, price, si_ze, in_stock, description,files) VALUES ('$name', '$price', '$in_stock', '$sizes', '$description', '$picture')";
 				   if ($conn->query($sql) === TRUE) {
                          echo "Thank you for adding a product :)";
                         } else {

@@ -64,7 +64,7 @@
         <!-- Example row of columns -->
 
         </form>
-		  <?php
+		<?php
 	
 				$host = 'localhost';
 				$user = 'root';
@@ -98,24 +98,26 @@
 					         while($row_prod=mysqli_fetch_assoc($result_prod))
 					          {
 							  $s=$row_prod["files"]; ?> 
-						   <div class='div2'><style> .div2 { border-style:groove;}</style><img src="<?php echo $s; ?>" alt="HTML5 Icon" style="width:500px;height:500px">
+						    <div class='div2'><style> .div2 { border-style:groove;}</style><img src="<?php echo $s; ?>" alt="HTML5 Icon" style="width:500px;height:500px">
 							  <br>Category:
 							  <?php echo $row_prod["name"]; ?> <br>Price: <?php echo $row_prod['price']; ?>
 							  <br>Size:<?php echo $row_prod['si_ze']; ?>
 							  <br>Description: <?php echo $row_prod['description']; ?> 
-							 <?php }
-							}
+							 <?php 
+							
 							?>
 							  Price: <?php echo $row["price"]; ?><br>
 							  Address: <?php echo $row["address"]; ?><br>
-							  Phone number: <?php echo $row["phone_number"]; ?><br>
+							  Phone number: <?php echo $row["phone_number"]; ?><br></div>
 							
 							  
 							 <?php
-			
+							  }
+							}
 					   }
 				  }
 				   }
+
 				  else
 				  {
 					  echo "You have no previous orders";

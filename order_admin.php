@@ -105,7 +105,7 @@ if(!empty($_GET))
 				$pass = '';
 			    $database = 'orders';
 				$new_database='basket';
-		
+				$prod_database='products';
 				
 				$conn = new mysqli($host, $user, $pass,$database);
 				if ($conn->connect_error) {
@@ -114,6 +114,11 @@ if(!empty($_GET))
 				   $new_conn = new mysqli($host, $user, $pass,$new_database);
 				if ($new_conn->connect_error) {
                  die("Connection failed: " . $new_conn->connect_error);
+                   }
+				   
+				   $prod_conn = new mysqli($host, $user, $pass,$prod_database);
+				if ($prod_conn->connect_error) {
+                 die("Connection failed: " . $prod_conn->connect_error);
                    }
 
 			$sql_prod="select * from BasketTable where email='$email'";
@@ -127,9 +132,11 @@ if(!empty($_GET))
 		
 							  $price=$row['price'];
 						  $id_prod=$row['products'];
+						  $del_stock=mysqli_query($prod_conn,"update ProductsTable set in_stock=in_stock-1 where id='$id_prod'");
 			   $sql = "INSERT INTO OrdersTable (email, products, price, address, phone_number, city, country, zip, pay_method) VALUES ('$email', '$id_prod', '$price', '$address','$phone_number', '$city', '$state', '$zip', '$pay_form')";
 				   if ($conn->query($sql) === TRUE) {
 					    $del = mysqli_query($new_conn,"delete from BasketTable where email = '$email'");
+						
                          echo "Thank you for your order :)";
                         } else {
                                echo "Error: " . $sql . "<br>" . $conn->error;

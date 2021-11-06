@@ -74,7 +74,7 @@
           <br><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button></br></br>
 
         </form>
-		  <?php
+		 <?php
 	if(!empty($_POST))
 			{
 				$host = 'localhost';
@@ -89,8 +89,8 @@
 				if ($conn->connect_error) {
                  die("Connection failed: " . $conn->connect_error);
                    }
-				   
-				   $sql="SELECT email FROM LoginTable WHERE email='$email' and password='$password'";
+				   $old_passord=md5($password);
+				   $sql="SELECT email FROM LoginTable WHERE email='$email' and password='$old_passord'";
 				    $result = mysqli_query($conn,$sql);
 
                     $count = mysqli_num_rows($result);
@@ -103,8 +103,8 @@
 			      else{
 				   if($new_password===$new_password2)
 				   {
-					   $encode_pass=md5($password);
-				   $sql_out="update LoginTable set password=$encode_password where email='$email'";
+					   $new_pass=md5($new_password);
+				   $sql_out="update LoginTable set password= MD5('$_POST[new_password]') where email='$email'";
 				   if(mysqli_query($conn, $sql_out) === TRUE)
 				   {
 					   echo "Password changed successessfully";
