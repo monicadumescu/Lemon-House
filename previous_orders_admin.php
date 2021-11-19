@@ -83,7 +83,7 @@
 				   if ($new_conn->connect_error) {
                  die("Connection failed: " . $new_conn->connect_error);
                    }
-				   $sql_out="select * from OrdersTable where email='$email'" ;
+				   $sql_out="select * from OrdersTable" ;
 				   $result_out = mysqli_query($conn,$sql_out);
 				   $count=mysqli_num_rows($result_out);
 				   if($count>0)
@@ -101,6 +101,8 @@
 					          {
 							  $s=$row_prod["files"]; ?> 
 						    <div class='div2'><style> .div2 { border-style:groove;}</style><img src="<?php echo $s; ?>" alt="HTML5 Icon" style="width:500px;height:500px">
+							<br>Buyer:
+							<?php echo $row["email"]; ?>
 							  <br>Category:
 							  <?php echo $row_prod["name"]; ?> <br>Price: <?php echo $row_prod['price']; ?>
 							  <br>Size:<?php echo $row_prod['si_ze']; ?>
@@ -110,9 +112,10 @@
 							?>
 							  Price: <?php echo $row["price"]; ?><br>
 							  Address: <?php echo $row["address"]; ?><br>
-							  Phone number: <?php echo $row["phone_number"]; ?><br></div>
+							  Phone number: <?php echo $row["phone_number"]; ?><br>
+							  <a class="btn btn-outline-success my-1 my-sm-1" href="delete_prevt.php?id=<?php echo $row['id']; ?>"  type="submit">Delete</a></div>
 							
-							  
+							 
 							 <?php
 							  }
 							}
