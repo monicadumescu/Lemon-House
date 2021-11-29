@@ -8,11 +8,12 @@
   $mail = new PHPMailer(true);
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $from_email = $_POST['message-body'];
+    $from_email = $_POST['message-email'];
     $text = $_POST['message-body'];
+    $name = $_POST['message-name'];
 
-    if (empty($from_email) || empty($text)) {
-      echo '<script>alert("Campuri goale")</script>';
+    if (empty($from_email) || empty($text) || empty($name)) {
+      echo '<script>alert(" Empty fields")</script>';
     } else {
       try
 			{
@@ -24,20 +25,39 @@
 				$mail->SMTPSecure = 'ssl';
 				$mail->Port = 465;
 
+        // mail catre admin
 				$mail->setFrom('lemonshopoffice@gmail.com', 'Lemon House Messager');
 				$mail->addAddress("lemonshopoffice@gmail.com", "Lemon House Messager");
 				$mail->isHTML(true);
-				$mail->Subject = 'Mesaj nou de la utilizator Lemon House ';
-				$mail->Body = "Ai primit urmatorul mesaj, de la " . $from_email . ", pe Lemon House: " . $text;
+				$mail->Subject = 'New direct message on Lemon House ';
+				$mail->Body = 'You received the following message, from ' . $name . ' (' . $from_email . '), on Lemon House: ' . $text;
 
 
 				if (!$mail->send())
-				{
+        {
 					echo '<script>alert("Message has not been sent")</script>';
 				}
 				else
+        {
           echo '<script>alert("Message has been sent")</script>';
+        }
 
+        // mail confirmare catre user
+  			$mail->setFrom('lemonshopoffice@gmail.com', 'Lemon House Messager');
+  			$mail->addAddress($from_email, $name);
+  			$mail->isHTML(true);
+  			$mail->Subject = 'Message sent to admin';
+  			$mail->Body = 'We have registered your message, and will soon give you an answer.';
+
+
+  			if (!$mail->send())
+  			{
+  				echo '<script>alert("Message has not been sent")</script>';
+  			}
+  			else
+        {
+          echo '<script>alert("Message has been sent")</script>';
+        }
 			}
 			catch (Exception $e) {
 				echo '<script>alert("Message has not been sent")</script>';

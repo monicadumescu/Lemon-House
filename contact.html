@@ -63,6 +63,10 @@
             <h2>By direct message</h2>
             <form method="POST" action="send_msg.php">
               <div class="mb-3">
+                <label for="message-name" class="form-label">Name</label>
+                <input required type="text" class="form-control" name="message-name" id="message-name" placeholder="Name">
+              </div>
+              <div class="mb-3">
                 <label for="message-email" class="form-label">Email address</label>
                 <input required type="email" class="form-control" name="message-email" id="message-email" placeholder="name@example.com">
               </div>
