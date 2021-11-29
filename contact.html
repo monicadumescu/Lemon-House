@@ -42,7 +42,7 @@
             <a class="nav-link" href="coments.php">Comments</a>
           </li>
         </ul>
-        
+
       </div>
     </nav>
 
@@ -51,20 +51,43 @@
       <div class="pt-5 pb-5 bg-light">
         <div class="container">
           <h1 class="display-3 mt-5">Contact</h1>
-          <p>This are some of the ways in which you can contact us.</p>
+          <p>These are some of the ways in which you can contact us.</p>
         </div>
       </div>
 
       <div class="container">
+
+        <!-- aici vine formul -->
+        <div class="row">
+          <div class="col-sm-12 col-lg-8 mt-3">
+            <h2>By direct message</h2>
+            <form method="POST" action="send_msg.php">
+              <div class="mb-3">
+                <label for="message-email" class="form-label">Email address</label>
+                <input required type="email" class="form-control" name="message-email" id="message-email" placeholder="name@example.com">
+              </div>
+              <div class="mb-3">
+                <label for="message-body" class="form-label">Your message for us</label>
+                <textarea required class="form-control" name="message-body" id="message-body" rows="3"></textarea>
+              </div>
+              <div>
+                <button type="submit" class="btn btn-secondary">Send message</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+
         <!-- Example row of columns -->
         <div class="row">
           <div class="col-sm-12 col-lg-8 mt-3">
-            <h2>Phone number</h2>
+            <h2>By phone number</h2>
             <p>0745521112</br>0256555666</p>
-            <h2>Email</h2>
-			<p>dumescumonica@gmail.com</p>
+            <h2>By personal email</h2>
+			         <p><a href="mailto:dumescu.monica@lemonhouse.com">Dumescu Monica</a></p>
+               <p><a href="mailto:ioan.hedes@lemonhouse.com">Ioan Hedes</a></p>
           </div>
-         
+
         </div>
 
       </div> <!-- /container -->
