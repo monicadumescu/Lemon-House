@@ -18,3 +18,5 @@ O data finalizata o comanda, cosul de cumparaturi va fii golit. Pe deasupra, un 
 Un client mai poate sa lase un comentariu si sa stearga doar comentarile proprii, dar si sa isi schimbe parola.
 ## Administrator
 Un administrator are toate accesibilitatiile unui client obisnuit. In plus un administrator poate aduga si sterge produse, dar si comentariile oricarui utilizator. De asemenea, un admnistrator poate vedea toate comenzile plasate de orice utilizator, dar si sa le stearga.
+
+O scurta prezentare a proiectului poate fi gasita la pagina de google slides: https://docs.google.com/presentation/d/1UmYza5s_TTRLNp28T3zMGOupebW6xXTHSi8nuHZR1PU/edit?usp=sharing
