@@ -42,6 +42,7 @@
 			  <a class="dropdown-item" href="live_coments.php">Leave a coment</a>
 			  <a class="dropdown-item" href="previous_orders.php">Previous orders</a>
 			  <a class="dropdown-item" href="chanhe_pass.php">Change password</a>
+        <a class="dropdown-item" href="generate_outfit.php">Generate outfit</a>
             </div>
 					<li class="nav-item">
             <a class="nav-link" href="#"><?php echo $_SESSION['email']; ?></a>

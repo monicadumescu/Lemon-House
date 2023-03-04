@@ -1,5 +1,5 @@
 <?php
-   include('session.php');
+    include('session.php');
 ?>
 <!doctype html>
 <html lang="en">
@@ -29,7 +29,7 @@
 
       <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item ">
+          <li class="nav-item active">
             <a class="nav-link" href="home.php">Home</a>
           </li>
 
@@ -49,7 +49,10 @@
             <a class="nav-link" href="#"><?php echo $_SESSION['email']; ?></a>
           </li>
         </ul>
-        
+        <form action="search.php" class="form-inline my-2 my-lg-0" method="get" >
+          <input class="form-control mr-sm-2" type="text" placeholder="Search" name="Search" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
       </div>
     </nav>
 
@@ -57,77 +60,15 @@
       <!-- Main jumbotron for a primary marketing message or call to action -->
       <div class="pt-5 pb-5 bg-light">
         <div class="container">
-          <h1 class="display-3 mt-5">Basket</h1>
+          <h1 class="display-3 mt-5">Generate outfit</h1>
           
         </div>
 		</div>
 		<div class="container">
         <!-- Example row of columns -->
-
-        </form>
-		  <?php
-	
-				$host = 'localhost';
-				$user = 'root';
-				$pass = '';
-				$database = 'basket';
-				$new_database='products';
-				$email=$_SESSION['email'];
-				$total_price=0;
-				$conn = new mysqli($host, $user, $pass,$database);
-                if ($conn->connect_error) {
-                die("Connection failed: " . $conn->connect_error);
-                 }
-				 
-				 $new_conn = new mysqli($host, $user, $pass,$new_database);
-                if ($new_conn->connect_error) {
-                die("Connection failed: " . $new_conn->connect_error);
-                } 
-				
-				$sql="select * from BasketTable where email='$email'";
-				$result=mysqli_query($conn,$sql);
-				if($result)
-				{
-					$count=mysqli_num_rows($result);
-					if($count)
-					{
-						while($row=$result->fetch_assoc())
-						{
-							$my_id=$row['products'];
-							$sql_prod="select * from ProductsTable where id='$my_id'";
-							$result_out=mysqli_query($new_conn,$sql_prod);
-							if($result_out)
-							{
-								$cout_out=mysqli_num_rows($result_out);
-								if($cout_out)
-								{
-									while($this_rows=$result_out->fetch_assoc())
-									{
-										$total_price=$total_price+$this_rows['price'];
-										 $s=$this_rows['files'];?> 
-							 
-							   <div class='div2'><style> .div2 { border-style:groove;}</style><img src="<?php echo $s; ?>" alt="HTML5 Icon" style="width:500px;height:500px">
-							  <br>Category:
-							  <?php echo $this_rows["name"]; ?> <br>Price: <?php echo $this_rows['price']; ?>
-							  <br>Size:<?php echo $this_rows['si_ze']; ?>
-							  <br>Description: <?php echo $this_rows['description']; ?> 
-							  <br>
-							  <a class="btn btn-outline-success my-1 my-sm-1" href="delete_basket.php?id=<?php echo $row['id']; ?>"  type="submit">Delete</a></div><br>
-								<?php	}
-								}
-							}
-						}
-					}
-					else echo "The basket is empty";
-				}
-				?>
-				<p>Your total is: </p> <?php  echo$total_price; ?>
-		<?php mysqli_close($conn);
-		?>
-		</br><p>Done with the shopping?</p>
-         <p><a class="btn btn-primary btn-lg" href="order.php" role="button">Order&raquo;</a></p>
-		 </br><p>More shopping?</p>
-         <p><a class="btn btn-primary btn-lg" href="home.php" role="button">Home&raquo;</a></p>
+        
+          <div class="col-sm-12 col-lg-6 mt-3">
+		  
       </div>
 
     </div>
