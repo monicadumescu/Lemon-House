@@ -83,61 +83,21 @@ include('session.php');
         if ($conn->connect_error) {
           die("Connection failed: " . $conn->connect_error);
         }
-        $sql = "select * from ProductsTable";
+        $sql_out = "select * from ProductsTable where ";
         // dupa facem un fel de filtru frumos in functie de ce a ales clientul bazat pe urmatoarele criterii:
 //eveniment
 //anotimp
 //preferinte
 //buget
         
-        $evenimet = $_GET['eveniment'];
-        $anotimp = $_GET['anotimp'];
+        $eveniment = "wedding";
+        $anotimp = "winter";
         $preferinte = $_GET['preferinte'];
-        $buget = $_GET['buget'];
+        $buget = 500;
+        $total_price = 0;
 
-        switch ($evenimet) {
-          case "nunta":
-            //do smth
-            break;
-          case "botez":
-            //do smth
-            break;
-          case "anivrsare":
-            // do smth
-            break;
-          case "bachet":
-            //do smth
-            break;
-          case "absolvire":
-            //do smth
-            break;
-          case "cununie":
-            //do smth
-            break;
-          case "interviu";
-            //do smth
-            break;
-          default:
-            break;
+        $sql_out = $sql_out . "(name like '%{$eveniment}%' or description like '%{$eveniment}%') AND (name like '%{$anotimp}%' or description like '%{$anotimp}%')";
 
-        }
-
-        switch ($anotimp) {
-          case "primavara":
-            //do smth
-            break;
-          case "vara":
-            //do smth
-            break;
-          case "toamna":
-            // do smth
-            break;
-          case "iarna":
-            //do smth
-            break;
-          default:
-            break;
-        }
 
         switch ($preferinte) {
           case "formal":
@@ -154,29 +114,38 @@ include('session.php');
         }
 
         $result_out = mysqli_query($conn, $sql_out);
-        $count = mysqli_num_rows($result_out);
+        if ($result_out) {
+          $count = mysqli_num_rows($result_out);
 
-        if ($count > 0) {
-          while ($row = $result_out->fetch_assoc()) {
-            $s = $row['files']; ?>
-            <div class='div2'>
-              <style>
-                .div2 {
-                  border-style: groove;
-                }
-              </style><img src="<?php echo $s; ?>" alt="HTML5 Icon" style="width:500px;height:500px">
-              <br>Category:
-              <?php echo $row["name"]; ?> <br>Price:
-              <?php echo $row['price']; ?>
-              <br>Size:
-              <?php echo $row['si_ze']; ?>
-              <br>Description:
-              <?php echo $row['description']; ?>
-              <br><a class="btn btn-outline-success my-2 my-sm-1" href="add_chart.php?id=<?php echo $row['id']; ?>"
-                type="submit">Add to chart</a>
-            </div><br>
+          if ($count > 0) {
+            while ($row_out = $result_out->fetch_assoc()) {
+              $total_price = $total_price + $row_out['price'];
+            }
+          }
 
-          <?php }
+          $result_out = mysqli_query($conn, $sql_out);
+          if ($total_price < $buget) {
+            while ($row = $result_out->fetch_assoc()) {
+              $s = $row['files']; ?>
+              <div class='div2'>
+                <style>
+                  .div2 {
+                    border-style: groove;
+                  }
+                </style><img src="<?php echo $s; ?>" alt="HTML5 Icon" style="width:500px;height:500px">
+                <br>Category:
+                <?php echo $row["name"]; ?> <br>Price:
+                <?php echo $row['price']; ?>
+                <br>Size:
+                <?php echo $row['si_ze']; ?>
+                <br>Description:
+                <?php echo $row['description']; ?>
+                <br><a class="btn btn-outline-success my-2 my-sm-1" href="add_chart.php?id=<?php echo $row['id']; ?>"
+                  type="submit">Add to chart</a>
+              </div><br>
+
+            <?php }
+          }
         } else {
           echo "There are no outfits that match your input";
         }
