@@ -1,78 +1,193 @@
 <?php
-    include('session.php');
+include('session.php');
 ?>
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Lemon House</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/custom_theme.css">
+  <title>Lemon House</title>
 
-  </head>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles/custom_theme.css">
 
-  <body>
+</head>
 
- <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-     <a class="navbar-brand" href="home.php">
-          <img src="logo.svg" widh="100%" height="40"/>
-      </a>
-      <button class="navbar-toggler" type="button">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<body>
 
-      <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="home.php">Home</a>
-          </li>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="home.php">
+      <img src="logo.svg" widh="100%" height="40" />
+    </a>
+    <button class="navbar-toggler" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-          <li class="nav-item">
-            <button class="nav-link dropdown-toggle bg-transparent btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</button>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="logout.php">Logout</a>
-              <a class="dropdown-item" href="my_basket.php">My basket</a>
-              <a class="dropdown-item" href="order.php">Finish and order</a>
-			  <a class="dropdown-item" href="live_coments.php">Leave a comment</a>
-			  <a class="dropdown-item" href="previous_orders.php">Previous orders</a>
-			  <a class="dropdown-item" href="change_pass.php">Change password</a>
-        <a class="dropdown-item" href="generate_outfit.php">Generate outfit</a>
-            </div>
-          </li>
-		  		<li class="nav-item">
-            <a class="nav-link" href="#"><?php echo $_SESSION['email']; ?></a>
-          </li>
-        </ul>
-        <form action="search.php" class="form-inline my-2 my-lg-0" method="get" >
-          <input class="form-control mr-sm-2" type="text" placeholder="Search" name="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="home.php">Home</a>
+        </li>
+
+        <li class="nav-item">
+          <button class="nav-link dropdown-toggle bg-transparent btn" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">Dropdown</button>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="logout.php">Logout</a>
+            <a class="dropdown-item" href="my_basket.php">My basket</a>
+            <a class="dropdown-item" href="order.php">Finish and order</a>
+            <a class="dropdown-item" href="live_coments.php">Leave a comment</a>
+            <a class="dropdown-item" href="previous_orders.php">Previous orders</a>
+            <a class="dropdown-item" href="change_pass.php">Change password</a>
+            <a class="dropdown-item" href="generate_outfit.php">Generate outfit</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">
+            <?php echo $_SESSION['email']; ?>
+          </a>
+        </li>
+      </ul>
+      <form action="search.php" class="form-inline my-2 my-lg-0" method="get">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" name="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+    </div>
+  </nav>
+
+  <div role="main">
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="pt-5 pb-5 bg-light">
+      <div class="container">
+        <h1 class="display-3 mt-5">Generate outfit</h1>
+
       </div>
-    </nav>
+    </div>
+    <div class="container">
+      <!-- Example row of columns -->
 
-    <div role="main">
-      <!-- Main jumbotron for a primary marketing message or call to action -->
-      <div class="pt-5 pb-5 bg-light">
-        <div class="container">
-          <h1 class="display-3 mt-5">Generate outfit</h1>
-          
-        </div>
-		</div>
-		<div class="container">
-        <!-- Example row of columns -->
+      <div class="col-sm-12 col-lg-6 mt-3">
+
+        <?php
+        $host = 'localhost';
+        $user = 'root';
+        $pass = '';
+        $database = 'products';
+
+        $conn = new mysqli($host, $user, $pass, $database);
+        if ($conn->connect_error) {
+          die("Connection failed: " . $conn->connect_error);
+        }
+        $sql = "select * from ProductsTable";
+        // dupa facem un fel de filtru frumos in functie de ce a ales clientul bazat pe urmatoarele criterii:
+//eveniment
+//anotimp
+//preferinte
+//buget
         
-          <div class="col-sm-12 col-lg-6 mt-3">
-		  
+        $evenimet = $_GET['eveniment'];
+        $anotimp = $_GET['anotimp'];
+        $preferinte = $_GET['preferinte'];
+        $buget = $_GET['buget'];
+
+        switch ($evenimet) {
+          case "nunta":
+            //do smth
+            break;
+          case "botez":
+            //do smth
+            break;
+          case "anivrsare":
+            // do smth
+            break;
+          case "bachet":
+            //do smth
+            break;
+          case "absolvire":
+            //do smth
+            break;
+          case "cununie":
+            //do smth
+            break;
+          case "interviu";
+            //do smth
+            break;
+          default:
+            break;
+
+        }
+
+        switch ($anotimp) {
+          case "primavara":
+            //do smth
+            break;
+          case "vara":
+            //do smth
+            break;
+          case "toamna":
+            // do smth
+            break;
+          case "iarna":
+            //do smth
+            break;
+          default:
+            break;
+        }
+
+        switch ($preferinte) {
+          case "formal":
+            //do smth
+            break;
+          case "casual":
+            //do smth
+            break;
+          case "sport":
+            // do smth
+            break;
+          default:
+            break;
+        }
+
+        $result_out = mysqli_query($conn, $sql_out);
+        $count = mysqli_num_rows($result_out);
+
+        if ($count > 0) {
+          while ($row = $result_out->fetch_assoc()) {
+            $s = $row['files']; ?>
+            <div class='div2'>
+              <style>
+                .div2 {
+                  border-style: groove;
+                }
+              </style><img src="<?php echo $s; ?>" alt="HTML5 Icon" style="width:500px;height:500px">
+              <br>Category:
+              <?php echo $row["name"]; ?> <br>Price:
+              <?php echo $row['price']; ?>
+              <br>Size:
+              <?php echo $row['si_ze']; ?>
+              <br>Description:
+              <?php echo $row['description']; ?>
+              <br><a class="btn btn-outline-success my-2 my-sm-1" href="add_chart.php?id=<?php echo $row['id']; ?>"
+                type="submit">Add to chart</a>
+            </div><br>
+
+          <?php }
+        } else {
+          echo "There are no outfits that match your input";
+        }
+        $conn->close();
+
+        ?>
+
       </div>
 
     </div>
-          
+
     <footer class="container mt-5">
       <p>&copy; Company 2020-2021</p>
     </footer>
@@ -80,9 +195,10 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script>
-      $('.navbar-toggler').on("click", function() {
+      $('.navbar-toggler').on("click", function () {
         $('.navbar-collapse').toggle('slow').addClass('opened');
       })
     </script>
-  </body>
+</body>
+
 </html>
