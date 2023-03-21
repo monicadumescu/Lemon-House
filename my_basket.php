@@ -66,9 +66,9 @@
         </form>
 		  <?php
 	
-				$host = 'localhost';
-				$user = 'root';
-				$pass = '';
+				$host = 'denismana.ddns.net';
+				$user = 'denis';
+				$pass = 'denis123';
 				$database = 'basket';
 				$new_database='products';
 				$email=$_SESSION['email'];
@@ -83,7 +83,7 @@
                 die("Connection failed: " . $new_conn->connect_error);
                 } 
 				
-				$sql="select * from BasketTable where email='$email'";
+				$sql="select * from baskettable where email='$email'";
 				$result=mysqli_query($conn,$sql);
 				if($result)
 				{
@@ -93,7 +93,7 @@
 						while($row=$result->fetch_assoc())
 						{
 							$my_id=$row['products'];
-							$sql_prod="select * from ProductsTable where id='$my_id'";
+							$sql_prod="select * from productstable where id='$my_id'";
 							$result_out=mysqli_query($new_conn,$sql_prod);
 							if($result_out)
 							{

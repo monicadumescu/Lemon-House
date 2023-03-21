@@ -41,9 +41,9 @@
 				$password = $_GET['password'];
 				
 					
-				$host = 'localhost';
-				$user = 'root';
-				$pass = '';
+				$host = 'denismana.ddns.net';
+				$user = 'denis';
+				$pass = 'denis123';
 				$error= mysql_error();
 				$database = 'LoginInfo';
 					

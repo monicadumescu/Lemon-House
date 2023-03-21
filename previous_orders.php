@@ -66,9 +66,9 @@
         </form>
 		<?php
 	
-				$host = 'localhost';
-				$user = 'root';
-				$pass = '';
+				$host = 'denismana.ddns.net';
+				$user = 'denis';
+				$pass = 'denis123';
 				$database = 'orders';
 				$email=$_SESSION['email'];
 				$conn = new mysqli($host, $user, $pass,$database);
@@ -81,7 +81,7 @@
 				   if ($new_conn->connect_error) {
                  die("Connection failed: " . $new_conn->connect_error);
                    }
-				   $sql_out="select * from OrdersTable where email='$email'" ;
+				   $sql_out="select * from orderstable where email='$email'" ;
 				   $result_out = mysqli_query($conn,$sql_out);
 				   $count=mysqli_num_rows($result_out);
 				   if($count>0)
@@ -91,7 +91,7 @@
 					  while($row=mysqli_fetch_assoc($result_out))
 					  {
 						  $id_prod=$row['products'];
-						  $sql_prod="select * from ProductsTable where id='$id_prod'";
+						  $sql_prod="select * from productstable where id='$id_prod'";
 						  $result_prod = mysqli_query($new_conn,$sql_prod);
 						  if(mysqli_num_rows($result_prod))
 				            {

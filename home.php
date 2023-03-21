@@ -68,16 +68,16 @@
         
           <div class="col-sm-12 col-lg-6 mt-3">
 		  <?php
-		  $host = 'localhost';
-				$user = 'root';
-				$pass = '';
+		  $host = 'denismana.ddns.net';
+				$user = 'denis';
+				$pass = 'denis123';
 				$database = 'products';
 				
 				$conn = new mysqli($host, $user, $pass,$database);
 				if ($conn->connect_error) {
                  die("Connection failed: " . $conn->connect_error);
                    }
-				   $sql_out="select id, name, price,si_ze, description,files from ProductsTable";
+				   $sql_out="SELECT id, name, price,si_ze, description,files FROM productstable";
 				   
 				   $result_out=mysqli_query($conn,$sql_out);
 				   $count = mysqli_num_rows($result_out);
@@ -92,7 +92,7 @@
 							  <?php echo $row["name"]; ?> <br>Price: <?php echo $row['price']; ?>
 							  <br>Size:<?php echo $row['si_ze']; ?>
 							  <br>Description: <?php echo $row['description']; ?> 
-							  <br><a class="btn btn-outline-success my-2 my-sm-1" href="add_chart.php?id=<?php echo $row['id']; ?>"  type="submit">Add to chart</a></div><br>
+							  <br><a class="btn btn-outline-success my-2 my-sm-1" href="add_chart.php?id=<?php echo $row['id']; ?>"  type="submit">Add to cart</a></div><br>
 							  
 					<?php  }
 				  }

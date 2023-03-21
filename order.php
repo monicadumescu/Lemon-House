@@ -98,9 +98,9 @@ if(!empty($_GET))
 				$pay_form=$_GET['pay_method'];
                 $email=$_SESSION['email'];				
 				
-				$host = 'localhost';
-				$user = 'root';
-				$pass = '';
+				$host = 'denismana.ddns.net';
+				$user = 'denis';
+				$pass = 'denis123';
 			    $database = 'orders';
 				$new_database='basket';
 				
@@ -113,7 +113,7 @@ if(!empty($_GET))
                  die("Connection failed: " . $new_conn->connect_error);
                    }
 			
-			$sql_prod="select * from BasketTable where email='$email'";
+			$sql_prod="select * from baskettable where email='$email'";
 			$result = mysqli_query($new_conn,$sql_prod);
 
                  $count = mysqli_num_rows($result);
@@ -123,9 +123,9 @@ if(!empty($_GET))
 					  {
 						  $price=$row['price'];
 						  $id_prod=$row['products'];
-			   $sql = "INSERT INTO OrdersTable (email, products, price, address, phone_number, city, country, zip, pay_method) VALUES ('$email', '$id_prod', '$price', '$address','$phone_number', '$city', '$state', '$zip', '$pay_form')";
+			   $sql = "INSERT INTO orderstable (email, products, price, address, phone_number, city, country, zip, pay_method) VALUES ('$email', '$id_prod', '$price', '$address','$phone_number', '$city', '$state', '$zip', '$pay_form')";
 				   if ($conn->query($sql) === TRUE) {
-					   $del = mysqli_query($new_conn,"delete from BasketTable where email = '$email'");
+					   $del = mysqli_query($new_conn,"delete from baskettable where email = '$email'");
                          echo "Thank you for your order :)";
                         } else {
                                echo "Error: " . $sql . "<br>" . $conn->error;

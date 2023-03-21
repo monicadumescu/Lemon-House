@@ -77,9 +77,9 @@
 				$password = $_GET['password'];
 				
 					
-				$host = 'localhost';
-				$user = 'root';
-				$pass = '';
+				$host = 'denismana.ddns.net';
+				$user = 'denis';
+				$pass = 'denis123';
 				$database = 'login_info';
 				
 				$conn = new mysqli($host, $user, $pass,$database);
@@ -87,7 +87,7 @@
                  die("Connection failed: " . $conn->connect_error);
                    }
 				   $encode_pass=md5($password);
-				$sql="SELECT email FROM LoginTable WHERE email='$email' and password='$encode_pass'";
+				$sql="SELECT email FROM logintable WHERE email='$email' and password='$encode_pass'";
 				 $result = mysqli_query($conn,$sql);
 				  
       

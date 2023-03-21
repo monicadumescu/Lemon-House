@@ -77,9 +77,9 @@
 		 <?php
 	if(!empty($_POST))
 			{
-				$host = 'localhost';
-				$user = 'root';
-				$pass = '';
+				$host = 'denismana.ddns.net';
+				$user = 'denis';
+				$pass = 'denis123';
 				$database = 'login_info';
 				$email=$_SESSION['email'];
 				$password=$_POST['old_password'];
@@ -90,7 +90,7 @@
                  die("Connection failed: " . $conn->connect_error);
                    }
 				   $old_passord=md5($password);
-				   $sql="SELECT email FROM LoginTable WHERE email='$email' and password='$old_passord'";
+				   $sql="SELECT email FROM logintable WHERE email='$email' and password='$old_passord'";
 				    $result = mysqli_query($conn,$sql);
 
                     $count = mysqli_num_rows($result);
@@ -104,7 +104,7 @@
 				   if($new_password===$new_password2)
 				   {
 					   $new_pass=md5($new_password);
-				   $sql_out="update LoginTable set password= MD5('$_POST[new_password]') where email='$email'";
+				   $sql_out="update logintable set password= MD5('$_POST[new_password]') where email='$email'";
 				   if(mysqli_query($conn, $sql_out) === TRUE)
 				   {
 					   echo "Password changed successessfully";

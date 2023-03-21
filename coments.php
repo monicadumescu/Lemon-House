@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="styles/custom_theme.css">
 
   </head>
+  
+
+
+
 
   <body>
 
@@ -45,6 +49,7 @@
         
       </div>
     </nav>
+	
 
     <div role="main">
       <!-- Main jumbotron for a primary marketing message or call to action -->

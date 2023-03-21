@@ -1,7 +1,7 @@
 <?php
-$host = 'localhost';
-				$user = 'root';
-				$pass = '';
+$host = 'denismana.ddns.net';
+				$user = 'denis';
+				$pass = 'denis123';
 				$database = 'basket';
 				
 				$conn = new mysqli($host, $user, $pass,$database);
@@ -9,11 +9,11 @@ $host = 'localhost';
                  die("Connection failed: " . $conn->connect_error);
                    }
 $id = $_GET['id']; // get id through query string
-$del = mysqli_query($conn,"delete from BasketTable where id = '$id'");
+$del = mysqli_query($conn,"delete from baskettable where id = '$id'");
 if($del)
 
 {
-    mysqli_close($db);
+    mysqli_close($conn);
     header("location:my_basket.php");
     exit; 
 }
