@@ -82,9 +82,9 @@
 					if($password == $password1)
 					{
 						
-					$host = 'localhost';
-					$user = 'root';
-					$pass = '';
+					$host = 'denismana.ddns.net';
+					$user = 'denis';
+					$pass = 'denis123';
 					$database = 'login_info';
 					
 					$conn = new mysqli($host, $user, $pass,$database);
@@ -97,8 +97,8 @@
 				          }
 			      else{
 					  $encode_pass=md5($password);
-					$sql = "INSERT INTO LoginTable (email, username, password) VALUES ('$email', '$username', '$encode_pass')";
-					$sql_mail="SELECT email FROM LoginTable WHERE email='$email'";
+					$sql = "INSERT INTO logintable (email, username, password) VALUES ('$email', '$username', '$encode_pass')";
+					$sql_mail="SELECT email FROM logintable WHERE email='$email'";
 					$result = mysqli_query($conn,$sql_mail);
                      $count = mysqli_num_rows($result);
 					 if($count==0)

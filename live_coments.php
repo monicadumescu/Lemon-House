@@ -75,9 +75,9 @@
         </form>
 		  <?php
 	
-				$host = 'localhost';
-				$user = 'root';
-				$pass = '';
+				$host = 'denismana.ddns.net';
+				$user = 'denis';
+				$pass = 'denis123';
 				$database = 'comments';
 				
 				$conn = new mysqli($host, $user, $pass,$database);
@@ -90,7 +90,7 @@
 				    $comment = $_GET['comment'];
 				
 				
-				    $sql = "INSERT INTO CommentsTable (email,comments) VALUES ('$email', '$comment')";
+				    $sql = "INSERT INTO commentstable (email,comments) VALUES ('$email', '$comment')";
 				    
 			           if ($conn->query($sql) === TRUE) {
                          echo "Thank you for your comment! :)";
@@ -98,7 +98,7 @@
                                echo "Error: " . $sql . "<br>" . $conn->error;
                                 }
 			     }
-				   $sql_out="select id, email, comments from CommentsTable";
+				   $sql_out="select id, email, comments from commentstable";
 				   $result_out=mysqli_query($conn,$sql_out);
 				   $count = mysqli_num_rows($result_out);
 				   

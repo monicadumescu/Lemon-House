@@ -107,9 +107,9 @@
 				$description=$_GET['description'];
 				$picture=$_GET['picture'];
 					
-				$host = 'localhost';
-				$user = 'root';
-				$pass = '';
+				$host = 'denismana.ddns.net';
+				$user = 'denis';
+				$pass = 'denis123';
 			    $database = 'products';
 				
 				$conn = new mysqli($host, $user, $pass,$database);
@@ -117,7 +117,7 @@
                  die("Connection failed: " . $conn->connect_error);
                    }
 				   
-				   $sql = "INSERT INTO ProductsTable (name, price, si_ze, in_stock, description,files) VALUES ('$name', '$price', '$in_stock', '$sizes', '$description', '$picture')";
+				   $sql = "INSERT INTO productstable (name, price, si_ze, in_stock, description,files) VALUES ('$name', '$price', '$in_stock', '$sizes', '$description', '$picture')";
 				   if ($conn->query($sql) === TRUE) {
                          echo "Thank you for adding a product :)";
                         } else {
