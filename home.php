@@ -42,6 +42,9 @@
 			  <a class="dropdown-item" href="live_coments.php">Leave a comment</a>
 			  <a class="dropdown-item" href="previous_orders.php">Previous orders</a>
 			  <a class="dropdown-item" href="change_pass.php">Change password</a>
+			  <a class="dropdown-item" href="generate_outfit_interface.php">Debug</a>
+			  <a class="dropdown-item" href="generate_outfit_interface_works.php">Debug2</a>
+        <a class="dropdown-item" href="generate_outfit.php">Generate an outfit</a>
             </div>
           </li>
 		  		<li class="nav-item">
@@ -68,7 +71,7 @@
         
           <div class="col-sm-12 col-lg-6 mt-3">
 		  <?php
-		  $host = 'denismana.ddns.net';
+		    $host = 'denismana.ddns.net';
 				$user = 'denis';
 				$pass = 'denis123';
 				$database = 'products';

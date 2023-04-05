@@ -14,9 +14,33 @@ include('session.php');
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="styles/custom_theme.css">
 
 </head>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script>
+      $('.navbar-toggler').on("click", function () {
+        $('.navbar-collapse').toggle('slow').addClass('opened');
+      })
+    </script>
+	<script>
+		$(document).ready(function(){
+			var questionCount = -1;
+			$("#zabutton").click(function(){
+				questionCount = questionCount + 1;
+				$("#questions_block").append( function(){
+					$("#test_denis").load("load-questions.php", {
+					questionNewCount: questionCount
+					
+					});
+				});
+			});
+		});
+</script>
+
 <body>
 
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -69,93 +93,22 @@ include('session.php');
 	   </div>
 	</div>
    </div>
-   <?php
- $host = 'denismana.ddns.net';
-   $user = 'denis';
-    $pass = 'denis123';
-   $database = 'questions';
-   $conn = new mysqli($host, $user, $pass, $database);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-	function generateQuestion($questionnr) {
-		$host = 'denismana.ddns.net';
-   $user = 'denis';
-    $pass = 'denis123';
-   $database = 'questions';
-   $conn = new mysqli($host, $user, $pass, $database);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-  		$sql_out = "SELECT name from questionstable WHERE id_question = $questionnr";
-		$result_out = mysqli_query($conn, $sql_out);
-		while ($row = $result_out->fetch_assoc()) {
-			$question_id = "ans" . "{$row['id_question']}";
-			echo "{$row['name']}<br><br>";
-			$sql_out2 = "SELECT * from answerstable WHERE id_question_a = $questionnr";
-			$result_out2 = mysqli_query($conn, $sql_out2);
-			while ($row2 = $result_out2->fetch_assoc()) {
-				$name_answer = $row2['name_answer'];
-				echo "<input type='radio' name={$question_id} id={$name_answer} value={$name_answer} required>";
-				echo "<label for={$name_answer}>{$name_answer}</label><br>";
-			}
-		}
-		$fname_button = "button". $questionnr;
-		
-		$GLOBALS['questions'] = $GLOBALS['questions'] + 1;
-		echo $GLOBALS['questions'];
-		$conn->close();
+   	
+	<div id="questions_block">
+	</div>
+	<form method="get" action="receive_data.php">
+	<div id="test_denis">
+	</div>
+	<button id="zabutton" type="button">GO!</button>
+	<button type="submit">Submit</button>
+	</form>
+	
 
-	} 
-     
-/**	echo "<form method='post' action='generate_outfit.php'>";
-	$sql_out = "SELECT * from questionstable";
-	$result_out = mysqli_query($conn, $sql_out);
-	while ($row = $result_out->fetch_assoc()) {
-		$question_id = "ans" . "{$row['id_question']}";
-        echo "{$row['name']}<br><br>";
-		$sql_out2 = "SELECT * from answerstable WHERE {$row['id_question']} = id_question_a";
-		$result_out2 = mysqli_query($conn, $sql_out2);
-		while ($row2 = $result_out2->fetch_assoc()) {
-			$name_answer = $row2['name_answer'];
-			echo "<input type='radio' name={$question_id} id={$name_answer} value={$name_answer} required>";
-			echo "<label for={$name_answer}>{$name_answer}</label><br>";
-		}
-	}*/
-	//$GLOBALS['questions'] = 1;
-	//generateQuestion(1);
-	/*
-	for ($i = 1 ; $i <=6 ; $i = $i + 1)
-	{
-		$name_button = "button" . "{$i}";
-		echo $name_button;
-		
-		
-	}*/
-		?>
-		<button id="my-button">Click Me</button>
-		<script>
-		document.getElementById("my-button").addEventListener("click", function() {
-		// Perform a server-side action when the button is clicked
-		var nr=1;
-		<?php
-			generateQuestion(4);
-		?>
-		nr++;
-		console.log(nr);
-		});
-		</script>
+	
     <footer class="container mt-5">
       <p>&copy; Company 2020-2021</p>
     </footer>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script>
-      $('.navbar-toggler').on("click", function () {
-        $('.navbar-collapse').toggle('slow').addClass('opened');
-      })
-    </script>
 </body>
 
 </html>
